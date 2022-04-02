@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {useDispatch} from "react-redux";
-import {buscarPersonajes} from "../actions/personajesActions";
+import {buscarPersonajesThunk} from "../actions/personajesActions";
 
 const Buscador:FC = () => {
 
@@ -10,7 +10,7 @@ const Buscador:FC = () => {
     return <div className="App-table">
         <div>
             <label>Buscar por Nombre: </label>
-            <input type="text" onChange={(e)=>  dispatch(buscarPersonajes(e.target.value))}
+            <input type="text" onChange={(e)=>  dispatch(buscarPersonajesThunk(e.target.value))}
                    placeholder="Rick, Morty, etc" autoFocus={true}/>
         </div>
     </div>

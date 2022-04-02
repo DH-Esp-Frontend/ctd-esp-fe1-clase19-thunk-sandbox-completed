@@ -1,6 +1,6 @@
 import Personaje from "../types/personaje.types";
 
-export const buscarPersonajes = async (nombre?: string): Promise<Personaje[]> => {
+export const buscarPersonajesAPI = async (nombre?: string): Promise<Personaje[]> => {
     let params = "?"
     if (nombre){
         params += `name=${nombre}`

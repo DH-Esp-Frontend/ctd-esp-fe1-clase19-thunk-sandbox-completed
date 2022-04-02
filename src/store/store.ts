@@ -1,7 +1,17 @@
+// NOTA
+// No olvides agregar redux-thunk a la lista de dependencias
+// npm install redux-thunk
+// Tambien podemos agregar redux-devtools-extension si queremos utilizar las dev tools de forma combinada con Thunk
+
+
 import {combineReducers} from "@reduxjs/toolkit";
 import personajesReducer from "../reducers/personajesReducer";
-import { createStore, compose } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+// Importamos applyMiddleware de Redux, para poder agregar Thunk como Middleware
+import { createStore, applyMiddleware } from 'redux';
 import {TypedUseSelectorHook, useSelector as useReduxSelector} from "react-redux";
+// Importamos el thunk de redux-thunk
+import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
     personajes: personajesReducer,
@@ -10,14 +20,6 @@ const rootReducer = combineReducers({
 export type IRootState = ReturnType<typeof rootReducer>;
 export const useSelector: TypedUseSelectorHook<IRootState> = useReduxSelector
 
-declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-    }
-}
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 export const store = createStore(
-    rootReducer, composeEnhancers()
+    rootReducer, composeWithDevTools(applyMiddleware(thunk))
 )
